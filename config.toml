@@ -1,0 +1,33 @@
+baseURL = "https://aintahydra.github.io/"
+title = "Aint a creature shitting out of mouth"
+languageCode = "en-us"
+paginate = 10
+theme = "binario"
+
+[Author] # Used in authorbox
+  name = "aintahydra"
+  bio = "Wadering around insecure worlds..."
+  avatar = "img/avatar.png"
+  
+[Params]
+  description = "what comes here?"
+  columns = 2
+  mainSections = ["post"]
+#  mainSections = ["content"]
+  dateFormat = "January 01, 2000"
+  colorTheme = "dark-green"
+  mainMenuAlighnment = "right"
+  authorbox = true
+  comments = false
+
+[Params.Entry]
+  meta = ["date", "categories", "tags"] # Enable meta fields in given order
+  toc = true # Enable Table of Contents
+  tocOpen = true # Open Table of Contents block. Optional
+
+[Params.Featured]
+  previewOnly = false # Show only preview featured image
+
+[Params.Breadcrumb]
+  enable = true # Enable breadcrumb block globally
+  homeText = "homeText comes here" # Home node text
