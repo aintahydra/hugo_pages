@@ -15,5 +15,5 @@ Crackme
 ## Sample 1: Get the passcode (Diff 1, Qual 5, C/C++, Multiplatform, x86-64)
 - Link: https://crackmes.one/crackme/5fca1e7933c5d424269a1a68
 - so simple
-	![image](images/getthepasscode_ghidra.png)
+	![image](../images/getthepasscode_ghidra.png)
 	
