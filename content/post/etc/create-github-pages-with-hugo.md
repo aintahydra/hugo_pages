@@ -2,7 +2,7 @@
 title: "Create Github Pages With Hugo"
 date: 2023-02-13T05:37:53+09:00
 draft: false
-tag: hugo, github.io
+tags: [hugo,github]
 ---
 
 # Create a static github page with Hugo

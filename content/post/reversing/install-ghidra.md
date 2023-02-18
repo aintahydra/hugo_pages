@@ -2,7 +2,7 @@
 title: "Install Ghidra"
 date: 2023-02-13T03:13:34+09:00
 draft: false
-tag: ghidra
+tags: [ghidra]
 ---
 
 # Install Java

@@ -2,7 +2,7 @@
 title: "Virtualbox Networking Modes"
 date: 2023-02-18T05:58:55+09:00
 draft: false
-tags: virtualbox
+tags: [virtualbox]
 ---
 
 # References

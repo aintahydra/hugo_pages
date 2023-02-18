@@ -2,7 +2,7 @@
 title: "Simple XOR Decoding With Ghidra"
 date: 2023-02-16T16:46:10+09:00
 draft: false
-tags: ghidra, reversing, XOR, obfuscation, encoding, decoding
+tags: [ghidra,reversing,XOR,obfuscation,encoding,decoding]
 ---
 
 ## References
