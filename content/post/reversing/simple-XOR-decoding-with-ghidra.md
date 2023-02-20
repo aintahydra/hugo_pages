@@ -14,7 +14,7 @@ tags: [ghidra,reversing,XOR,obfuscation,encoding,decoding]
 - Create a new project
 - Import a shellcode (shellcode.bin provided by the author)
     - Tell Language: x86 (visual studio)
-    ![image](/home/user/Work-ghidra/DrJoshStroschein/drjoshstroschein-01.png)
+    ![image](drjoshstroschein-01.png)
 - The analyzed result shows up
     - Go to the first offset (00000000)
     - (at this moment, the codes seem to be a series of random bytes)
@@ -25,7 +25,7 @@ tags: [ghidra,reversing,XOR,obfuscation,encoding,decoding]
 - The first jump (at 00000000) goes to 00000016 `CALL FUN_00000002`
 - Looking at the codes from 00000002, there is function that works as a XOR decoder:
     - 0x186 and 0x97 seem to be the size of the packed code and the encoding key
-    ![image](/home/user/Work-ghidra/DrJoshStroschein/drjoshstroschein-02.png)
+    ![image](drjoshstroschein-02.png)
 - from the code above, 
     ```
     00000009 XOR byte ptr DS:[EAX + ECX*1],0x97
@@ -38,7 +38,7 @@ tags: [ghidra,reversing,XOR,obfuscation,encoding,decoding]
 
 ## Insights?    
 - Before decoded, they (the codes below 0000001b) look like weird operations that doesn't make sense at all, or look just random data.
-![image](/home/user/Work-ghidra/DrJoshStroschein/drjoshstroschein-03.png)
+![image](drjoshstroschein-03.png)
 - Also, withinin the encoded data section, 0x97 appears a lot. We can say that the NULL bytes in the original codes are encoded as the same value with the XOR key (since `0 XOR key == key`)
 
 ## How we can obtain the encoded codes?
@@ -53,7 +53,7 @@ Two options
     - set block over the ecoded codes, then Right-click,  and choose "Clear Code Bytes" from the encoded shellcodes
     - press the "play" menu icon (Display Script Manager)
     - if the "Script Manager" window pops up, filter with "xor", then "XorMemoryScript.java" appers
-    ![image](/home/user/Work-ghidra/DrJoshStroschein/drjoshstroschein-04.png)
+    ![image](drjoshstroschein-04.png)
     - Choose "the Play" icon, again
     - Then ghidra asks which the XorValue is used; enter 0x97
     - Then the decoded codes are displayed on the screen

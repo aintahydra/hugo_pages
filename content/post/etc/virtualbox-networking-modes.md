@@ -23,7 +23,7 @@ tags: [virtualbox]
 - Sufficient in most cases
 - Internet-enabled: from Internal network to Internet access is possible
 - Guests on internel network CANNOT talk each other
-- ![image](../images/VirtualBox-network-modes-–-how-the-NAT-mode-works.webp)(from www.nakivo.com)
+- ![image](VirtualBox-network-modes-–-how-the-NAT-mode-works.webp)(from www.nakivo.com)
 - Enabling NAT for a VM with VBoxManage: `VBoxManage modifyvm VM_name --nic1 nat`
   - VM_name: name of a virtual machine
   - nic1: number of virtual machine adapter
@@ -34,7 +34,7 @@ tags: [virtualbox]
   - However, "Port forwarding" enables the host or the machines of the host network to access guests
 - A built-in VBox NAT router uses
 - Network address and name can be changed: (Global preference) File > Preferences > Network > Edit the settings(icon): Default address 10.0.2.0/24(GW 10.0.2.1, DHCP 10.0.2.3) can be changed to 192.168.xx.0/24(GW x.x.x.1, DHCP x.x.x.3)
-- ![image](../images/VirtualBox-network-settings-–-the-NAT-Network-mode.webp)(from www.nakivo.com)
+- ![image](VirtualBox-network-settings-–-the-NAT-Network-mode.webp)(from www.nakivo.com)
 - Adding a new NAT Network with VBoxManage: `VBoxManage natnetwork add --netname mynatnet1 --network "192.168.15.0/24" --enable`
 - Configuring a VM to use NAT Network with VBoxManage: `VBoxManage modifyvm VM_name --nic1 natnetwork`
   - nic1: the first virtual network adapter(network interface controller)
@@ -43,12 +43,12 @@ tags: [virtualbox]
 - The host and guest share the physical NIC (thanks to net filter)
 - Guests can access the Internet as the host does
 - "Promiscuous mode" can be enabled with this mode
-- ![image](../images/VirtualBox-network-settings-–-bridged-networking.webp)(from www.nakivo.com)
+- ![image](VirtualBox-network-settings-–-bridged-networking.webp)(from www.nakivo.com)
 
 ## Internal
 - Guests can talk each other, but CANNOT communicate with the host nor access to the external network 
 - models real networks
-- ![image](../images/VirtualBox-network-settings-–-using-the-Internal-network-mode-in-a-combination-with-the-NAT-mode.webp)(from www.nakivo.com)
+- ![image](VirtualBox-network-settings-–-using-the-Internal-network-mode-in-a-combination-with-the-NAT-mode.webp)(from www.nakivo.com)
 
 ## Host-only
 - Geusts and the host can talk each other
@@ -56,7 +56,7 @@ tags: [virtualbox]
   - Default network address can be changed
   - DHCP can be set on/off
   - No Gateway presented (since outer world do not access into the host-only network)
-- ![image](../images/VirtualBox-network-settings-–-VMs-use-the-host-only-network.webp)(from www.nakivo.com)
+- ![image](VirtualBox-network-settings-–-VMs-use-the-host-only-network.webp)(from www.nakivo.com)
 
 
 
@@ -87,6 +87,6 @@ tags: [virtualbox]
   - `* 0.0.0.0/0 ::/0` allows any addresses (range control is disabled)
   - if `/etc/vbox/networks.conf` file exists with no ranges are specified, then no addresses will be assigned to host-only adapters
   - now, vboxnet1 can be set as follows:
-  ![image](../images/VirtualBox-host-only-network-setup.png)
+  ![image](VirtualBox-host-only-network-setup.png)
 
 
