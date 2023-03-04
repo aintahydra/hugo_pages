@@ -2,6 +2,7 @@
 title: "Testing Websockets 1"
 date: 2023-03-04T20:16:46+09:00
 draft: false
+tags: [websocket,socket]
 ---
 
 ## Intro
