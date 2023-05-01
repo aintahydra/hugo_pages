@@ -1,7 +1,7 @@
 ---
 title: "Crackmes With Ghidra"
 date: 2023-02-15T05:30:09+09:00
-draft: false
+draft: true
 tags: [ghidra,reversing,crackme]
 ---
 
