@@ -130,6 +130,32 @@ remote: Support for password authentication was removed on August 13, 2021.
 ---
 ---
 
+# Routines
+
+## routine 1
+
+$ git add content/post/XXXX.md
+
+(if needed,
+  $ git config user.email "XXX"
+  $ git config user.name "XXX"
+)
+
+$ git commit -m "XXX"
+$ git push origin master
+
+## routine 2
+
+(at hugo root)
+$ hugo -t binario
+  (... new pages will be created)
+$ cd public
+$ git add *
+$ git commit -m "<messages>"
+$ git push origin master
+
+---
+
 # Basic Git commands
 ![git_commands](https://user-images.githubusercontent.com/14274827/91470661-9d5a8780-e8b2-11ea-9ccb-0d813d2e35d1.png)
 
