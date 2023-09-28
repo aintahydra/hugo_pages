@@ -1,3 +1,10 @@
+---
+title: "peda and gdb"
+date: 2023-03-04T20:16:46+09:00
+draft: false
+tags: [gdb,peda]
+---
+
 ## install peda
 
 1. Clone PEDA
