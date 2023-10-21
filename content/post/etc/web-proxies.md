@@ -1,8 +1,8 @@
 ---
-title: "DVWA Walkthrough"
+title: "Web Proxies"
 date: 2023-03-12T09:19:43+09:00
 draft: false
-tags: [proxy]
+tags: [proxy,web_proxy,burp,mitmproxy,zed,proxify]
 ---
 
 ===========
@@ -85,3 +85,72 @@ Flow filter expression
 - (the flow can be edited as well)
 - after the request is replayed, no new flow is recorded, BUT the old one is UPDATED
 
+=================
+# Other proxies
+
+-----------------
+## Zed Attack Proxy (ZAP)
+
+REF:
+    - https://www.kali.org/tools/zaproxy/
+
+### Install
+- apt install zaproxy 
+
+
+-----------------
+## <strike> Proxify </strike>
+REF:
+- install: 
+    - https://www.kitploit.com/2020/12/proxify-swiss-army-knife-proxy-tool-for.html
+    - <strike> https://www.kali.org/tools/proxify/ </strike>
+- usage: https://gitlab.com/kalilinux/packages/proxify
+
+<strike>
+### install
+- apt install proxify
+</strike>
+
+### install binary manually 
+- download a binary from https://github.com/projectdiscovery/proxify/releases/
+- create a directory for proxify binaries: `mkdir -p ~/local/proxify`
+- move the downloaded file to the directory and unzip: `mv proxify_0.0.12_linux_amd64.zip ~/local/proxify; cd ~/local/proxify; unzip proxify*.zip`
+- run: "~/local/proxify/proxify"
+
+### lab
+- captured packets to dockered-dvwa
+```
+$ cd ~/local/proxify
+$ ./proxify -http-addr "127.0.0.1:80" 
+
+                       _ ___    
+   ___  _______ __ __ (_) _/_ __
+  / _ \/ __/ _ \\ \ // / _/ // /
+ / .__/_/  \___/_\_\/_/_/ \_, / 
+/_/                      /___/
+
+                projectdiscovery.io
+
+[INF] Current proxify version v0.0.12 (latest)
+[INF] HTTP Proxy Listening on 127.0.0.1:80
+[INF] Socks5 Proxy Listening on 127.0.0.1:10080
+[INF] Saving proxify traffic to logs
+```
+
+- on Firefox, (with network onnections - proxy is set to 127.0.0.1:8888), accessed: 127.0.0.1:80
+
+- then, 
+```
+$ cd ~/local/proxify/logs
+
+$ tail -f 127.0.0.1-ab2c790481173eab.txt 
+Sec-Fetch-Site: same-origin
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+
+token=8b479aefbd90795395b3e7089ae0dc09&phrase=ChangeMe&send=Submit
+HTTP/1.1 502 Bad Gateway
+Content-Length: 0
+Warning: 199 "martian" "[:RUNTIME] ztls fallback failed <- dial tcp 127.0.0.1:443: connect: connection refused" "Wed, 11 Oct 2023 03:50:38 GMT"
+```
