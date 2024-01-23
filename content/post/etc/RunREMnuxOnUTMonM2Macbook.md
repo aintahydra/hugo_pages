@@ -17,8 +17,9 @@ I tried to run REMnux VM with the following settings:
 2. https://www.youtube.com/watch?v=krGvTMq29gA
 
 ## Convert the format of the REMNux disk image
-`$ qemu-img convert -f vmdk -O vhdx REMnuxVM.vmdk REMnuxVM.vhdx`
-    * (According to [1], the REMnux VMWare disk image (.vmdk) is converted to the VHDX format whereas [2] changes the image to the QCOM2 format; `qemu-img convert -p -O qcom2 Remnux-disk1.vmdk Remnux.qcom2`)
+`$ qemu-img convert -p -f vmdk -O vhdx REMnuxVM.vmdk REMnuxVM.vhdx`
+    * `-p`: indicates the conversion progress.
+    * `-f`: indicates the source image format.
 
 ## Import the converted disk image
 
@@ -27,13 +28,12 @@ I tried to run REMnux VM with the following settings:
 3. on the Start window, choose the slow "Emulate" (not "Virtualize")
 4. on the Operating System window, choose "Other" (not "Windows" nor "Linux")
 5. on the Other window, 
-    - uncheck "Skip ISO boot"
-    - press the "Browse" button, choose the converted image as the Boot ISO Image
-6. on the "Hardware", leave the options like below
+    - check "Skip ISO boot"
+6. on the "Hardware", leave the default options (must be like below:
     - Architecture: x86_64,
     - System: Standard PC(Q35 + ICH9, 2009) (alias of pc-q35-7.2) q35
     - Memory: 4G
-    - CPU Cores: Default
+    - CPU Cores: Default)
 7. on the "Storage" window, specify the size as "1GB"
 8. on the "Shared Directory" window, just proceed to the "next" step leaving nothing checked
 9. on the "Summary" window, name the VM and check the "Open VM Settings"
