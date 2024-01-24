@@ -20,6 +20,7 @@ I tried to run REMnux VM with the following settings:
 `$ qemu-img convert -p -f vmdk -O vhdx REMnuxVM.vmdk REMnuxVM.vhdx`
     * `-p`: indicates the conversion progress.
     * `-f`: indicates the source image format.
+    * `$ qemu-img convert -p -f vmdk -O qcow2 REMnuxVM.vmdk REMnuxVM.qcow2` works as well.
 
 ## Import the converted disk image
 
@@ -42,12 +43,13 @@ I tried to run REMnux VM with the following settings:
         - Check "Force Multicore" and assign more cores (4 in my case)
     - QEMU
         - Uncheck "UEFI Boot"
+        - Uncheck "RNG Device" (especially, in case of Linux VM)
 11. There are two IDE Drives displayed on the left menu
-    - Leave the CD/DVD one (the first IDE Drive, in my case)
-    - Choose the Disk Image one (The second IDE Drive, in my case), and "Delete"
-    - Then, create a "New..." drive
+    - You can leave the CD/DVD drive if exists
+    - Select the IDE Disk Image drive, and "Delete"
+    - Create a "New..." drive
         - Interface: IDE
-        - Press "Import" and choose the converted ".vhdx" disk image
+        - Press "Import" and choose the converted ".vhdx" (or .qcow2) disk image
     - "Save" all the changes
-
+12. Wait for a while.
 The emulated VM will work but must be very slow. Be patient.
