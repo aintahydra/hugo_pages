@@ -53,3 +53,8 @@ I tried to run REMnux VM with the following settings:
     - "Save" all the changes
 12. Wait for a while.
 The emulated VM will work but must be very slow. Be patient.
+
+## Notes
+- Where VM disk images are located: `~/Library/Containers/com.utmapp.UTM/Data/Documents`
+- How to install the Ubuntu Server with the (amd64) Emulation option: https://docs.getutm.app/guides/ubuntu/
+    - You can install the desktop environment later at your preference

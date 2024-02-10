@@ -38,3 +38,10 @@ Terminal=false
 ```
 NOTE: If the icon does not properly show up, download a new image and use it as the icon image(a good icon image is at https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/issues/1705 ).
 
+# On Mac OSX
+
+Ref: https://github.com/NationalSecurityAgency/ghidra/issues/5422
+When it omits permission error...
+```
+xattr -r -d com.apple.quarantine $ghidraFolder
+```
